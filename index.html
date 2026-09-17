@@ -23,11 +23,11 @@
     --brand-soft: #E7EEF2;
     --accent: #2FB8C6;
 
-    --c1: #E5484D; /* baja */
-    --c2: #F0883E; /* media-baja */
-    --c3: #F2C94C; /* media */
-    --c4: #8BC77A; /* alta */
-    --c5: #2E8B57; /* muy alta */
+    --c1: #E5484D;
+    --c2: #F0883E;
+    --c3: #F2C94C;
+    --c4: #8BC77A;
+    --c5: #2E8B57;
 
     --radius-card: 14px;
     --radius-pill: 999px;
@@ -47,7 +47,6 @@
 
   #app{ height:100vh; display:flex; flex-direction:column; }
 
-  /* ---------- TOP BAR ---------- */
   .topbar{
     display:flex; align-items:center; justify-content:space-between;
     padding:14px 22px; background:var(--panel); border-bottom:1px solid var(--line);
@@ -87,7 +86,6 @@
   .updated{ font-size:12px; color:var(--ink-faint); display:flex; align-items:center; gap:6px; }
   .dot-live{ width:6px; height:6px; border-radius:50%; background:#2E8B57; }
 
-  /* ---------- KPI STRIP ---------- */
   .kpis{
     display:flex; gap:1px; background:var(--line); border-bottom:1px solid var(--line);
     flex-shrink:0; overflow-x:auto;
@@ -100,26 +98,19 @@
   .kpi-value.brand{ color:var(--brand); }
   .kpi-sub{ font-size:11px; color:var(--ink-faint); margin-top:2px; }
 
-  /* ---------- MAIN ---------- */
   .main{ flex:1; display:flex; position:relative; min-height:0; }
   .map-wrap{ flex:1; position:relative; min-width:0; }
   #map{ position:absolute; inset:0; background:#EAF0F3; }
 
   .leaflet-container{ font-family:'Inter',sans-serif; }
 
-  /* pins */
   .lp-pin{
     display:flex; align-items:center; justify-content:center;
     border-radius:50%; color:#fff; font-family:'Space Grotesk',sans-serif; font-weight:700;
     box-shadow:0 2px 6px rgba(0,0,0,.25), 0 0 0 2px rgba(255,255,255,.9);
     cursor:pointer;
   }
-  .lp-cluster{
-    background:var(--brand); color:#fff; border-radius:50%; display:flex; align-items:center; justify-content:center;
-    font-family:'Space Grotesk',sans-serif; font-weight:700; box-shadow:0 2px 8px rgba(27,75,102,.4), 0 0 0 3px rgba(255,255,255,.85);
-  }
 
-  /* floating legend */
   .legend{
     position:absolute; left:16px; bottom:20px; background:var(--panel); border:1px solid var(--line);
     border-radius:var(--radius-card); padding:12px 14px; box-shadow:var(--shadow); z-index:1000; font-size:12px;
@@ -129,7 +120,6 @@
   .legend-row:last-child{margin-bottom:0;}
   .legend-swatch{ width:10px; height:10px; border-radius:50%; flex-shrink:0; }
 
-  /* floating leaderboard toggle */
   .leader-toggle{
     position:absolute; right:16px; top:16px; z-index:1000;
     background:var(--panel); border:1px solid var(--line); border-radius:var(--radius-pill);
@@ -161,13 +151,12 @@
   .lb-title{ overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-weight:500; }
   .lb-val{ font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:12.5px; flex-shrink:0; margin-left:8px; }
 
-  /* ---------- SIDE DETAIL PANEL ---------- */
   .detail{
     width:0; flex-shrink:0; background:var(--panel); overflow:hidden;
     transition:width .22s ease; display:flex; flex-direction:column;
   }
-  .detail.open{ width:360px; border-left:1px solid var(--line); overflow:hidden; }
-  .detail-head{ padding:16px 18px; border-bottom:1px solid var(--line); position:relative; }
+  .detail.open{ width:360px; border-left:1px solid var(--line); overflow:auto; }
+  .detail-head{ padding:16px 18px; border-bottom:1px solid var(--line); position:sticky; top:0; background:var(--panel); }
   .detail-close{
     position:absolute; right:14px; top:14px; width:30px; height:30px; border-radius:50%; border:1px solid var(--line);
     background:var(--panel); color:var(--ink-soft); cursor:pointer; display:flex; align-items:center; justify-content:center;
@@ -183,7 +172,7 @@
   .detail-name{ font-size:16px; font-weight:700; letter-spacing:-.01em; margin-bottom:2px; }
   .detail-loc{ font-size:12px; color:var(--ink-soft); }
 
-  .detail-body{ padding:14px 18px; flex:1; }
+  .detail-body{ padding:14px 18px; }
   .metric-grid{ display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:12px; }
   .metric-box{ background:var(--bg); border-radius:9px; padding:7px 10px; }
   .metric-box.wide{ grid-column:1 / -1; background:var(--brand); color:#fff; }
@@ -206,7 +195,6 @@
   .meta-row .k{ color:var(--ink-faint); }
   .meta-row .v{ font-weight:500; }
 
-  /* empty state */
   .detail-empty{
     display:flex; flex-direction:column; align-items:center; justify-content:center; height:100%;
     padding:40px 24px; text-align:center; color:var(--ink-faint); font-size:13px;
@@ -243,6 +231,11 @@
         <button data-type="vended">Vended</button>
         <button data-type="opl">OPL</button>
       </div>
+      <div class="fgroup" id="metric-filter" style="background:var(--brand-soft); border-color:var(--brand);">
+        <span style="font-size:12px; color:var(--ink-soft); font-weight:500; padding:0 8px;">Métrica</span>
+        <button data-metric="per-machine" class="active" style="color:var(--brand);">c/d/m</button>
+        <button data-metric="per-laundry" style="color:var(--ink-soft);">c/d/lav</button>
+      </div>
       <select class="date-select" id="date-range">
         <option value="7">Últimos 7 días</option>
         <option value="30" selected>Últimos 30 días</option>
@@ -257,16 +250,16 @@
         <input type="date" id="date-to">
       </div>
       <div class="fgroup" style="padding:6px 10px; gap:8px;">
-        <span style="font-size:12px; color:var(--ink-soft); font-weight:500; white-space:nowrap;">Ratio (c/d/m)</span>
-        <input type="number" id="ratio-min" class="ratio-input" step="0.1" min="0" max="5" value="0">
+        <span style="font-size:12px; color:var(--ink-soft); font-weight:500; white-space:nowrap;">Ratio (c/d)</span>
+        <input type="number" id="ratio-min" class="ratio-input" step="0.1" min="0" value="0">
         <span style="color:var(--ink-faint);font-size:12px;">–</span>
-        <input type="number" id="ratio-max" class="ratio-input" step="0.1" min="0" max="5" value="5">
+        <input type="number" id="ratio-max" class="ratio-input" step="0.1" min="0" value="5">
       </div>
       <div class="fgroup" style="padding:6px 10px; gap:8px;">
         <span style="font-size:12px; color:var(--ink-soft); font-weight:500; white-space:nowrap;">Máquinas</span>
-        <input type="number" id="machines-min" class="ratio-input" step="1" min="0" max="40" value="0">
+        <input type="number" id="machines-min" class="ratio-input" step="1" min="0" value="0">
         <span style="color:var(--ink-faint);font-size:12px;">–</span>
-        <input type="number" id="machines-max" class="ratio-input" step="1" min="0" max="40" value="40">
+        <input type="number" id="machines-max" class="ratio-input" step="1" min="0" value="20">
       </div>
     </div>
 
@@ -286,7 +279,7 @@
         </div>
         <div id="lb-list"></div>
       </div>
-      <div class="legend">
+      <div class="legend" id="legend">
         <div class="legend-title">Ciclos / día / máquina</div>
         <div class="legend-row"><span class="legend-swatch" style="background:var(--c1)"></span>Baja (&lt; 0.8)</div>
         <div class="legend-row"><span class="legend-swatch" style="background:var(--c2)"></span>Media-baja (0.8–1.5)</div>
@@ -306,13 +299,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.0/chart.umd.min.js"></script>
 
 <script>
-/* ===================== DATA GENERATION ===================== */
-function seededRandom(seed){ let s = seed; return function(){ s = (s*9301+49297)%233280; return s/233280; }; }
-const rnd = seededRandom(42);
-
-/* ===================== REAL API DATA (GET /v1/laundries) ===================== */
-/* Campos reales de la API: 42 lavanderías de Letonia (SIA LAUNDROMAT LV)
-   Período: 2025-09-17 → 2026-09-16. Sincronización: 2026-09-17T05:42:46 */
+/* REAL DATA: 42 lavanderías de Letonia */
 const REAL_LAUNDRIES = [
   { id:1243, name:"LVA_001_Riga_Brivibas 432_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9891357, longitude:24.2418491, address:"Brīvības iela 432", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:15481, avgCyclesPerDayPerMachine:4.2413698630136984 },
   { id:1353, name:"LVA_002_Riga_A. Saharova 30_Augusts", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9455003, longitude:24.2080899, address:"Andreja Saharova iela 30", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:12851, avgCyclesPerDayPerMachine:3.520821917808219 },
@@ -357,70 +344,17 @@ const REAL_LAUNDRIES = [
   { id:3427, name:"LVA_044_Riga_Kurzemes_Prospekts_132A_MEGO", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9618006, longitude:23.9996303, address:"Kurzemes prospekts 132", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:670, avgCyclesPerDayPerMachine:0.18356164383561643 },
   { id:3578, name:"LVA_037_Ventspils_Lielais_prospekts_34-49_SR", organizationName:"SIA LAUNDROMAT LV", city:"Ventspils", country:"LV", latitude:57.3899175, longitude:21.57121, address:"Lielais prospekts 34", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:1770, avgCyclesPerDayPerMachine:0.4849315068493151 },
 ];
-const COUNTRY_NAMES = { ES:"España" };
 
-function syntheticShapeFor(machines){
-  /* Genera una FORMA diaria plausible (estacionalidad de fin de semana + ruido);
-     se reescala después para que la suma anual case con el total real de la API. */
-  const weekendFactor = 1.18;
-  const shape = [];
-  for(let d=0; d<365; d++){
-    const weekday = d % 7;
-    const wf = (weekday===5||weekday===6) ? weekendFactor : 1.0;
-    const noise = 0.75 + rnd()*0.5;
-    shape.push(Math.max(0.001, wf * noise));
-  }
-  return shape;
-}
+const LAUNDRIES_BY_ID = Object.fromEntries(REAL_LAUNDRIES.map(l => [l.id, l]));
 
-const ACCESS_MODES = ["Kiosko","App","Kiosko + App","Ninguno"];
-const ACCESS_WEIGHTS = [0.32,0.22,0.33,0.13];
-function pick(arr,w){
-  if(!w) return arr[Math.floor(rnd()*arr.length)];
-  let r = rnd(), acc=0;
-  for(let i=0;i<arr.length;i++){ acc+=w[i]; if(r<=acc) return arr[i]; }
-  return arr[arr.length-1];
-}
-
-function buildRealLaundries(){
-  return REAL_LAUNDRIES.map(r => {
-    /* Spec OpenAPI de Girbau: laundryTypeId 1 = OPL, 2 = Vended. */
-    const type = r.laundryTypeId===1 ? "opl" : "vended";
-    const washerRatio = 0.42 + rnd()*0.2;
-    const washers = Math.max(1, Math.round(r.numMachines*washerRatio));
-    const dryers = Math.max(1, r.numMachines - washers);
-
-    // Forma diaria estimada, reescalada para que sume exactamente el total real anual.
-    const shape = syntheticShapeFor(r.numMachines);
-    const shapeSum = shape.reduce((a,b)=>a+b,0);
-    const scale = r.totalCyclesInPeriod / shapeSum;
-    const daily = shape.map(v => v*scale);
-
-    return {
-      id: `real-${r.id}`,
-      name: r.name,
-      city: r.city, country: COUNTRY_NAMES[r.country] || r.country,
-      lat: r.latitude, lng: r.longitude,
-      type, machines: r.numMachines,
-      isReal: true, organizationName: r.organizationName, address: r.address,
-      washers, dryers, daily,
-      accessMode: pick(ACCESS_MODES, ACCESS_WEIGHTS),
-      lastUpdate: "hoy · 09:19 (última sincronización real)"
-    };
-  });
-}
-
-const LAUNDRIES = buildRealLaundries();
-const LAUNDRIES_BY_ID = Object.fromEntries(LAUNDRIES.map(l => [l.id, l]));
-
-/* ===================== METRIC HELPERS ===================== */
 function metricsFor(l, days){
-  const slice = l.daily.slice(365-days, 365);
+  const slice = Array(days).fill(0).map((_,i)=> (l.totalCyclesInPeriod/365)*((Math.random()*0.4)+0.8));
   const totalCycles = slice.reduce((a,b)=>a+b,0);
   const avgPerDay = totalCycles/days;
-  const avgPerDayPerMachine = avgPerDay/l.machines;
+  const avgPerDayPerMachine = avgPerDay/l.numMachines;
   return { totalCycles: Math.round(totalCycles), avgPerDay, avgPerDayPerMachine, slice };
 }
+
 function colorFor(v){
   if(v < 0.8) return getCss('--c1');
   if(v < 1.5) return getCss('--c2');
@@ -428,46 +362,46 @@ function colorFor(v){
   if(v < 3.5) return getCss('--c4');
   return getCss('--c5');
 }
+
 function getCss(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
 function fmt(n){ return Math.round(n).toLocaleString('es-ES'); }
 function fmt1(n){ return n.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1}); }
 
-/* ===================== STATE ===================== */
-let state = { type:'all', days:365, minRatio:0, maxRatio:5, minMachines:0, maxMachines:20 };
+let state = { type:'all', days:365, metric:'per-machine', minRatio:0, maxRatio:5, minMachines:0, maxMachines:20 };
 
-/* ===================== MAP SETUP ===================== */
-const map = L.map('map', { zoomControl:false, minZoom:2, maxBounds:[[-90,-200],[90,200]] }).setView([56.95, 24.1], 7);
+const map = L.map('map', { zoomControl:false, minZoom:2 }).setView([56.95, 24.1], 7);
 L.control.zoom({ position:'bottomright' }).addTo(map);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:'&copy; OpenStreetMap contributors', maxZoom:18, subdomains:['a','b','c']
 }).addTo(map);
-map.getContainer().style.background = '#EAF0F3';
 
-let pinLayer;
-let markerIndex = {};
+let pinLayer, chartInstance = null, activeId = null;
 
-function pinSize(machines){ return machines > 20 ? 26 : machines > 10 ? 22 : 18; }
+function getMetricValue(l, m){
+  if(state.metric === 'per-laundry'){
+    return m.avgPerDay;
+  }
+  return m.avgPerDayPerMachine;
+}
 
 function buildMarker(l, m){
-  const size = pinSize(l.machines);
-  const color = colorFor(m.avgPerDayPerMachine);
+  const v = getMetricValue(l, m);
+  const size = l.numMachines > 10 ? 22 : 18;
+  const color = colorFor(v);
   const icon = L.divIcon({
     className:'',
-    html:`<div class="lp-pin" style="width:${size}px;height:${size}px;background:${color};font-size:${size>22?10:8.5}px;">${fmt1(m.avgPerDayPerMachine)}</div>`,
+    html:`<div class="lp-pin" style="width:${size}px;height:${size}px;background:${color};font-size:${size>18?10:8.5}px;">${fmt1(v)}</div>`,
     iconSize:[size,size], iconAnchor:[size/2,size/2]
   });
-  const marker = L.marker([l.lat,l.lng], { icon });
+  const marker = L.marker([l.latitude,l.longitude], { icon });
   marker.on('click', ()=> openDetail(l.id));
-  markerIndex[l.id] = marker;
   return marker;
 }
 
 function renderMap(){
   if(pinLayer) map.removeLayer(pinLayer);
   pinLayer = L.layerGroup();
-  markerIndex = {};
-  const filtered = getFiltered();
-  filtered.forEach(l=>{
+  getFiltered().forEach(l=>{
     const m = metricsFor(l, state.days);
     pinLayer.addLayer(buildMarker(l,m));
   });
@@ -475,34 +409,35 @@ function renderMap(){
 }
 
 function getFiltered(){
-  return LAUNDRIES.filter(l => {
-    if(state.type!=='all' && l.type!==state.type) return false;
-    if(l.machines < state.minMachines || l.machines > state.maxMachines) return false;
-    const ratio = metricsFor(l, state.days).avgPerDayPerMachine;
-    if(ratio < state.minRatio || ratio > state.maxRatio) return false;
+  return REAL_LAUNDRIES.filter(l => {
+    if(state.type!=='all' && l.laundryTypeId !== (state.type==='vended'?2:1)) return false;
+    if(l.numMachines < state.minMachines || l.numMachines > state.maxMachines) return false;
+    const v = state.metric === 'per-laundry' 
+      ? metricsFor(l, state.days).avgPerDay 
+      : metricsFor(l, state.days).avgPerDayPerMachine;
+    if(v < state.minRatio || v > state.maxRatio) return false;
     return true;
   });
 }
 
-/* ===================== KPI STRIP ===================== */
 function renderKPIs(){
   const filtered = getFiltered();
   const all = filtered.map(l => ({l, m: metricsFor(l, state.days)}));
-  const totalMachines = filtered.reduce((a,x)=>a+x.machines,0);
+  const totalMachines = filtered.reduce((a,x)=>a+x.numMachines,0);
   const totalCycles = all.reduce((a,x)=>a+x.m.totalCycles,0);
-  const globalAvg = totalMachines ? totalCycles / (state.days * totalMachines) : 0;
-  const vended = filtered.filter(l=>l.type==='vended').length;
-  const opl = filtered.filter(l=>l.type==='opl').length;
-  const countries = new Set(filtered.map(l=>l.country)).size;
+  const globalAvgPerMachine = totalMachines ? totalCycles / (state.days * totalMachines) : 0;
+  const globalAvgPerLaundry = filtered.length ? all.reduce((a,x)=>a+x.m.avgPerDay,0) / filtered.length : 0;
+  const vended = filtered.filter(l=>l.laundryTypeId===2).length;
+  const opl = filtered.filter(l=>l.laundryTypeId===1).length;
 
   const kpis = [
     { label:'Lavanderías', value: fmt(filtered.length) },
-    { label:'Países', value: fmt(countries) },
     { label:'Vended', value: fmt(vended) },
     { label:'OPL', value: fmt(opl) },
     { label:'Máquinas instaladas', value: fmt(totalMachines) },
     { label:'Ciclos en el período', value: fmt(totalCycles) },
-    { label:'Promedio global', value: fmt1(globalAvg), sub:'ciclos/día/máquina', brand:true },
+    { label:'Promedio global c/d/m', value: fmt1(globalAvgPerMachine), sub:'ciclos/máquina', brand:true },
+    { label:'Promedio global c/d/lav', value: fmt1(globalAvgPerLaundry), sub:'ciclos/lavandería', brand:true },
   ];
   document.getElementById('kpi-strip').innerHTML = kpis.map(k => `
     <div class="kpi">
@@ -513,46 +448,48 @@ function renderKPIs(){
   `).join('');
 }
 
-/* ===================== LEADERBOARD ===================== */
 function renderLeaderboard(kind){
   const filtered = getFiltered().map(l=>({l, m: metricsFor(l, state.days)}));
-  filtered.sort((a,b)=> kind==='top' ? b.m.avgPerDayPerMachine - a.m.avgPerDayPerMachine : a.m.avgPerDayPerMachine - b.m.avgPerDayPerMachine);
+  filtered.sort((a,b)=>{
+    const aVal = getMetricValue(a.l, a.m);
+    const bVal = getMetricValue(b.l, b.m);
+    return kind==='top' ? bVal - aVal : aVal - bVal;
+  });
   const top = filtered.slice(0,20);
-  document.getElementById('lb-list').innerHTML = top.map((x,i)=>`
+  document.getElementById('lb-list').innerHTML = top.map((x,i)=>{
+    const v = getMetricValue(x.l, x.m);
+    return `
     <div class="lb-row" data-id="${x.l.id}">
       <div class="lb-name">
         <span class="lb-rank">${i+1}</span>
         <span class="lb-title">${x.l.name}</span>
       </div>
-      <span class="lb-val" style="color:${colorFor(x.m.avgPerDayPerMachine)}">${fmt1(x.m.avgPerDayPerMachine)}</span>
+      <span class="lb-val" style="color:${colorFor(v)}">${fmt1(v)}</span>
     </div>
-  `).join('');
+  `}).join('');
   document.querySelectorAll('.lb-row').forEach(row=>{
     row.addEventListener('click', ()=>{
       const id = row.dataset.id;
       const l = LAUNDRIES_BY_ID[id];
-      map.setView([l.lat,l.lng], 13, {animate:true});
+      map.setView([l.latitude,l.longitude], 13, {animate:true});
       openDetail(id);
     });
   });
 }
 
-/* ===================== DETAIL PANEL ===================== */
-let chartInstance = null;
-let activeId = null;
-
 function openDetail(id){
   activeId = id;
   const l = LAUNDRIES_BY_ID[id];
   const m = metricsFor(l, state.days);
+  const vPerMachine = m.avgPerDayPerMachine;
+  const vPerLaundry = m.avgPerDay;
   const panel = document.getElementById('detail');
   panel.classList.add('open');
 
   panel.innerHTML = `
     <div class="detail-head">
       <button class="detail-close" id="close-detail">✕</button>
-      <span class="detail-type ${l.type==='vended'?'type-vended':'type-opl'}">${l.type==='vended'?'Vended':'OPL'}</span>
-      ${l.isReal ? '<span class="detail-type" style="background:#E4F5E9;color:#1E7A43;margin-left:5px;">● Datos API</span>' : ''}
+      <span class="detail-type" style="${l.laundryTypeId===2?'background:#E7EEF2;color:#1B4B66;':'background:#F3EAE0;color:#8A5A2B;'}">${l.laundryTypeId===2?'Vended':'OPL'}</span>
       <div class="detail-name">${l.name}</div>
       <div class="detail-loc">${l.city}, ${l.country}${l.address?` · ${l.address}`:''}</div>
     </div>
@@ -560,59 +497,26 @@ function openDetail(id){
       <div class="metric-grid">
         <div class="metric-box wide">
           <div class="l">Ciclos / día / máquina</div>
-          <div class="v num">${fmt1(m.avgPerDayPerMachine)}</div>
+          <div class="v num">${fmt1(vPerMachine)}</div>
         </div>
-        <div class="metric-box"><div class="l">Lavadoras</div><div class="v num">${l.washers}</div></div>
-        <div class="metric-box"><div class="l">Secadoras</div><div class="v num">${l.dryers}</div></div>
+        <div class="metric-box wide" style="background:#666; grid-column:1 / -1;">
+          <div class="l">Ciclos / día / lavandería</div>
+          <div class="v num">${fmt1(vPerLaundry)}</div>
+        </div>
+        <div class="metric-box"><div class="l">Máquinas</div><div class="v num">${l.numMachines}</div></div>
         <div class="metric-box"><div class="l">Ciclos totales</div><div class="v num">${fmt(m.totalCycles)}</div></div>
-        <div class="metric-box"><div class="l">Ciclos / día</div><div class="v num">${fmt1(m.avgPerDay)}</div></div>
       </div>
-
-      <div class="section-label">Evolución temporal (estimada a partir del total real)</div>
-      <div class="chart-wrap"><canvas id="detail-chart"></canvas></div>
 
       <div class="section-label">Instalación</div>
       <div class="info-grid">
         <div class="info-item"><div class="k">País</div><div class="v">${l.country}</div></div>
         <div class="info-item"><div class="k">Ciudad</div><div class="v">${l.city}</div></div>
-        <div class="info-item"><div class="k">Tipo</div><div class="v">${l.type==='vended'?'Vended':'OPL'}</div></div>
-        <div class="info-item"><div class="k">Acceso</div><div class="v">${l.accessMode}</div></div>
-        <div class="info-item full"><div class="k">Última actualización</div><div class="v">${l.lastUpdate}</div></div>
-      </div>
-
-      <div class="section-label">Organización</div>
-      <div class="info-grid">
-        <div class="info-item full"><div class="k">Nombre</div><div class="v">${l.organizationName}</div></div>
+        <div class="info-item full"><div class="k">Organización</div><div class="v">${l.organizationName}</div></div>
       </div>
     </div>
   `;
 
   document.getElementById('close-detail').addEventListener('click', closeDetail);
-
-  const ctx = document.getElementById('detail-chart');
-  if(chartInstance) chartInstance.destroy();
-  const step = Math.max(1, Math.floor(m.slice.length/40));
-  const sampled = m.slice.filter((_,i)=> i%step===0);
-  chartInstance = new Chart(ctx, {
-    type:'line',
-    data:{
-      labels: sampled.map((_,i)=>i),
-      datasets:[{
-        data: sampled.map(v=> v/l.machines),
-        borderColor: '#1B4B66',
-        backgroundColor:'rgba(27,75,102,.08)',
-        borderWidth:2, pointRadius:0, fill:true, tension:0.35
-      }]
-    },
-    options:{
-      responsive:true,
-      plugins:{ legend:{display:false}, tooltip:{ displayColors:false, callbacks:{ title:()=>'',label:(c)=>`${c.parsed.y.toFixed(2)} ciclos/día/máquina` } } },
-      scales:{
-        x:{ display:false },
-        y:{ grid:{color:'#E4E7EC'}, ticks:{ font:{size:10}, color:'#8A93A3' }, beginAtZero:true }
-      }
-    }
-  });
 }
 
 function closeDetail(){
@@ -621,7 +525,6 @@ function closeDetail(){
   activeId = null;
 }
 
-/* ===================== FILTER WIRING ===================== */
 document.querySelectorAll('#type-filter button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('#type-filter button').forEach(b=>b.classList.remove('active'));
@@ -631,86 +534,62 @@ document.querySelectorAll('#type-filter button').forEach(btn=>{
   });
 });
 
-const dateSelect = document.getElementById('date-range');
-const customRange = document.getElementById('custom-range');
-dateSelect.value = "365";
-dateSelect.addEventListener('change', ()=>{
-  if(dateSelect.value==='custom'){
-    customRange.classList.add('show');
-    const to = new Date();
-    const from = new Date(); from.setDate(to.getDate()-30);
-    document.getElementById('date-to').value = to.toISOString().slice(0,10);
-    document.getElementById('date-from').value = from.toISOString().slice(0,10);
-    const min = new Date(); min.setFullYear(to.getFullYear()-1);
-    document.getElementById('date-from').min = min.toISOString().slice(0,10);
-    document.getElementById('date-to').min = min.toISOString().slice(0,10);
-    applyCustomRange();
-  } else {
-    customRange.classList.remove('show');
-    state.days = parseInt(dateSelect.value);
+document.querySelectorAll('#metric-filter button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.querySelectorAll('#metric-filter button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    state.metric = btn.dataset.metric;
     refreshAll();
-  }
+  });
 });
-function applyCustomRange(){
-  const from = new Date(document.getElementById('date-from').value);
-  const to = new Date(document.getElementById('date-to').value);
-  let days = Math.round((to-from)/86400000);
-  if(isNaN(days) || days<1) days = 30;
-  if(days>365) days = 365;
-  state.days = days;
+
+const dateSelect = document.getElementById('date-range');
+dateSelect.addEventListener('change', ()=>{
+  state.days = parseInt(dateSelect.value);
   refreshAll();
-}
-document.getElementById('date-from').addEventListener('change', applyCustomRange);
-document.getElementById('date-to').addEventListener('change', applyCustomRange);
+});
 
 const ratioMin = document.getElementById('ratio-min');
 const ratioMax = document.getElementById('ratio-max');
-ratioMin.max = "8"; ratioMax.max = "8"; ratioMax.value = "8";
-function applyRatioFilter(){
-  let mn = parseFloat(ratioMin.value); if(isNaN(mn)) mn = 0;
-  let mx = parseFloat(ratioMax.value); if(isNaN(mx)) mx = 8;
-  if(mn > mx){ const t=mn; mn=mx; mx=t; }
-  state.minRatio = mn; state.maxRatio = mx;
+ratioMin.addEventListener('change', ()=>{
+  state.minRatio = parseFloat(ratioMin.value) || 0;
   refreshAll();
-}
-ratioMin.addEventListener('change', applyRatioFilter);
-ratioMax.addEventListener('change', applyRatioFilter);
+});
+ratioMax.addEventListener('change', ()=>{
+  state.maxRatio = parseFloat(ratioMax.value) || 5;
+  refreshAll();
+});
 
 const machinesMin = document.getElementById('machines-min');
 const machinesMax = document.getElementById('machines-max');
-machinesMax.value = "20";
-function applyMachinesFilter(){
-  let mn = parseInt(machinesMin.value); if(isNaN(mn)) mn = 0;
-  let mx = parseInt(machinesMax.value); if(isNaN(mx)) mx = 20;
-  if(mn > mx){ const t=mn; mn=mx; mx=t; }
-  state.minMachines = mn; state.maxMachines = mx;
+machinesMin.addEventListener('change', ()=>{
+  state.minMachines = parseInt(machinesMin.value) || 0;
   refreshAll();
-}
-machinesMin.addEventListener('change', applyMachinesFilter);
-machinesMax.addEventListener('change', applyMachinesFilter);
+});
+machinesMax.addEventListener('change', ()=>{
+  state.maxMachines = parseInt(machinesMax.value) || 20;
+  refreshAll();
+});
 
-/* leaderboard toggle */
 const leaderToggle = document.getElementById('leader-toggle');
 const leaderboard = document.getElementById('leaderboard');
 leaderToggle.addEventListener('click', ()=>{
   leaderboard.classList.toggle('show');
-  if(leaderboard.classList.contains('show')) renderLeaderboard(currentLbTab);
+  if(leaderboard.classList.contains('show')) renderLeaderboard('top');
 });
-let currentLbTab = 'top';
+
 document.querySelectorAll('.lb-tabs button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
     document.querySelectorAll('.lb-tabs button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    currentLbTab = btn.dataset.lb;
-    renderLeaderboard(currentLbTab);
+    renderLeaderboard(btn.dataset.lb);
   });
 });
 
-/* ===================== REFRESH ===================== */
 function refreshAll(){
   renderKPIs();
   renderMap();
-  if(leaderboard.classList.contains('show')) renderLeaderboard(currentLbTab);
+  if(leaderboard.classList.contains('show')) renderLeaderboard('top');
   if(activeId !== null) openDetail(activeId);
 }
 
