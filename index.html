@@ -233,8 +233,8 @@
       </div>
       <div class="fgroup" id="metric-filter" style="background:var(--brand-soft); border-color:var(--brand);">
         <span style="font-size:12px; color:var(--ink-soft); font-weight:500; padding:0 8px;">Métrica</span>
-        <button data-metric="per-machine" class="active" style="color:var(--brand);">c/d/m</button>
-        <button data-metric="per-laundry" style="color:var(--ink-soft);">c/d/lav</button>
+        <button data-metric="per-machine" class="active" title="Media de ciclos por máquina por día" style="color:var(--brand);">c/d/m</button>
+        <button data-metric="per-laundry" title="Media de ciclos por lavandería por día" style="color:var(--ink-soft);">c/d/lav</button>
       </div>
       <select class="date-select" id="date-range">
         <option value="7">Últimos 7 días</option>
@@ -348,19 +348,48 @@ const REAL_LAUNDRIES = [
 const LAUNDRIES_BY_ID = Object.fromEntries(REAL_LAUNDRIES.map(l => [l.id, l]));
 
 function metricsFor(l, days){
-  const slice = Array(days).fill(0).map((_,i)=> (l.totalCyclesInPeriod/365)*((Math.random()*0.4)+0.8));
-  const totalCycles = slice.reduce((a,b)=>a+b,0);
-  const avgPerDay = totalCycles/days;
-  const avgPerDayPerMachine = avgPerDay/l.numMachines;
-  return { totalCycles: Math.round(totalCycles), avgPerDay, avgPerDayPerMachine, slice };
+  /* Usar valores REALES, no aleatorios */
+  const totalCycles = Math.round(l.totalCyclesInPeriod * (days / 365));
+  const avgPerDay = totalCycles / days;
+  const avgPerDayPerMachine = avgPerDay / l.numMachines;
+  return { totalCycles, avgPerDay, avgPerDayPerMachine, slice: [] };
+}
+
+function updateLegend(){
+  const legendTitle = document.querySelector('.legend-title');
+  const legendRows = document.querySelectorAll('.legend-row');
+  
+  if(state.metric === 'per-machine'){
+    legendTitle.textContent = 'Ciclos / día / máquina';
+    legendRows[0].innerHTML = '<span class="legend-swatch" style="background:var(--c1)"></span>Baja (< 0.8)';
+    legendRows[1].innerHTML = '<span class="legend-swatch" style="background:var(--c2)"></span>Media-baja (0.8–1.5)';
+    legendRows[2].innerHTML = '<span class="legend-swatch" style="background:var(--c3)"></span>Media (1.5–2.5)';
+    legendRows[3].innerHTML = '<span class="legend-swatch" style="background:var(--c4)"></span>Alta (2.5–3.5)';
+    legendRows[4].innerHTML = '<span class="legend-swatch" style="background:var(--c5)"></span>Muy alta (> 3.5)';
+  } else {
+    legendTitle.textContent = 'Ciclos / día / lavandería';
+    legendRows[0].innerHTML = '<span class="legend-swatch" style="background:var(--c1)"></span>Baja (< 8)';
+    legendRows[1].innerHTML = '<span class="legend-swatch" style="background:var(--c2)"></span>Media-baja (8–15)';
+    legendRows[2].innerHTML = '<span class="legend-swatch" style="background:var(--c3)"></span>Media (15–25)';
+    legendRows[3].innerHTML = '<span class="legend-swatch" style="background:var(--c4)"></span>Alta (25–35)';
+    legendRows[4].innerHTML = '<span class="legend-swatch" style="background:var(--c5)"></span>Muy alta (> 35)';
+  }
 }
 
 function colorFor(v){
-  if(v < 0.8) return getCss('--c1');
-  if(v < 1.5) return getCss('--c2');
-  if(v < 2.5) return getCss('--c3');
-  if(v < 3.5) return getCss('--c4');
-  return getCss('--c5');
+  if(state.metric === 'per-laundry'){
+    if(v < 8) return getCss('--c1');
+    if(v < 15) return getCss('--c2');
+    if(v < 25) return getCss('--c3');
+    if(v < 35) return getCss('--c4');
+    return getCss('--c5');
+  } else {
+    if(v < 0.8) return getCss('--c1');
+    if(v < 1.5) return getCss('--c2');
+    if(v < 2.5) return getCss('--c3');
+    if(v < 3.5) return getCss('--c4');
+    return getCss('--c5');
+  }
 }
 
 function getCss(v){ return getComputedStyle(document.documentElement).getPropertyValue(v).trim(); }
@@ -536,9 +565,26 @@ document.querySelectorAll('#type-filter button').forEach(btn=>{
 
 document.querySelectorAll('#metric-filter button').forEach(btn=>{
   btn.addEventListener('click', ()=>{
+    /* Evitar clickeos múltiples en el mismo botón */
+    if(btn.classList.contains('active')) return;
+    
     document.querySelectorAll('#metric-filter button').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
     state.metric = btn.dataset.metric;
+    
+    /* Resetear filtros al máximo rango según métrica */
+    ratioMin.value = 0;
+    if(state.metric === 'per-laundry'){
+      ratioMax.value = 50;
+      state.maxRatio = 50;
+    } else {
+      ratioMax.value = 5;
+      state.maxRatio = 5;
+    }
+    state.minRatio = 0;
+    
+    /* Actualizar leyenda */
+    updateLegend();
     refreshAll();
   });
 });
@@ -587,6 +633,7 @@ document.querySelectorAll('.lb-tabs button').forEach(btn=>{
 });
 
 function refreshAll(){
+  updateLegend();
   renderKPIs();
   renderMap();
   if(leaderboard.classList.contains('show')) renderLeaderboard('top');
