@@ -270,7 +270,7 @@
       </div>
     </div>
 
-    <div class="updated"><span class="dot-live"></span> Datos agregados · última actualización hoy 04:00</div>
+    <div class="updated"><span class="dot-live"></span> 42 lavanderías · última sincronización 2026-09-17 05:42</div>
   </div>
 
   <div class="kpis" id="kpi-strip"></div>
@@ -311,15 +311,51 @@ function seededRandom(seed){ let s = seed; return function(){ s = (s*9301+49297)
 const rnd = seededRandom(42);
 
 /* ===================== REAL API DATA (GET /v1/laundries) ===================== */
-/* Campos reales de la API + totalCyclesInPeriod/avgCyclesPerDayPerMachine del último snapshot
-   sincronizado del conector MCP (periodo 2025-09-16 → 2026-09-15). Sincronización: 2026-09-16T14:23:56 */
+/* Campos reales de la API: 42 lavanderías de Letonia (SIA LAUNDROMAT LV)
+   Período: 2025-09-17 → 2026-09-16. Sincronización: 2026-09-17T05:42:46 */
 const REAL_LAUNDRIES = [
-  { id:103, name:"La Calandra", organizationName:"La Calandra", city:"Vic", country:"ES", latitude:41.9382356, longitude:2.2485013000000436, address:"Carrer Sot dels Pradals, 9", numMachines:19, laundryTypeId:1, totalCyclesInPeriod:96357, avgCyclesPerDayPerMachine:13.894304253785148 },
-  { id:251, name:"Lavauto Center", organizationName:"Lavauto", city:"Vic", country:"ES", latitude:41.946795, longitude:2.258564, address:"Carretera de Manlleu, Km. 1", numMachines:6, laundryTypeId:2, totalCyclesInPeriod:601, avgCyclesPerDayPerMachine:0.27442922374429224 },
-  { id:301, name:"Lavauto Norte", organizationName:"Lavauto", city:"Vic", country:"ES", latitude:41.94567576464164, longitude:2.2600350522280905, address:"Calle de Marie Curie, 1", numMachines:6, laundryTypeId:2, totalCyclesInPeriod:13568, avgCyclesPerDayPerMachine:6.195433789954338 },
-  { id:302, name:"Lavauto Sur", organizationName:"Lavauto", city:"Vic", country:"ES", latitude:41.91814007520262, longitude:2.2513792485613067, address:"Calle Torre d'en Franch, 1", numMachines:8, laundryTypeId:2, totalCyclesInPeriod:17528, avgCyclesPerDayPerMachine:6.002739726027397 },
-  { id:303, name:"Lavapro", organizationName:"Lavapro", city:"Barcelona", country:"ES", latitude:41.386969755177624, longitude:2.16855525970459, address:"Plaça de Catalunya, 7", numMachines:14, laundryTypeId:1, totalCyclesInPeriod:37980, avgCyclesPerDayPerMachine:7.432485322896282 },
-  { id:338, name:"GEX Vended", organizationName:"GEX Vended", city:"VIC", country:"ES", latitude:41.9454746, longitude:2.2581155, address:"CARRETERA MANLLEU KM 1", numMachines:5, laundryTypeId:2, totalCyclesInPeriod:149, avgCyclesPerDayPerMachine:0.08164383561643836 },
+  { id:1243, name:"LVA_001_Riga_Brivibas 432_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9891357, longitude:24.2418491, address:"Brīvības iela 432", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:15481, avgCyclesPerDayPerMachine:4.2413698630136984 },
+  { id:1353, name:"LVA_002_Riga_A. Saharova 30_Augusts", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9455003, longitude:24.2080899, address:"Andreja Saharova iela 30", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:12851, avgCyclesPerDayPerMachine:3.520821917808219 },
+  { id:1448, name:"LVA_003_Riga_Dizozolu 21_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9030865, longitude:24.0975628, address:"Dižozolu iela 21", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:15559, avgCyclesPerDayPerMachine:4.262739726027397 },
+  { id:1488, name:"LVA_004_Riga_Kr.Valdemara 77_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9626218, longitude:24.1238637, address:"Krišjāņa Valdemāra iela 77", numMachines:11, laundryTypeId:2, totalCyclesInPeriod:10711, avgCyclesPerDayPerMachine:2.6677459526774596 },
+  { id:1530, name:"LVA_006_Riga_Kr. Barona 17_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9523495, longitude:24.1231962, address:"Krišjāņa Barona iela 17", numMachines:18, laundryTypeId:2, totalCyclesInPeriod:18046, avgCyclesPerDayPerMachine:2.7467275494672756 },
+  { id:1593, name:"LVA_007_Riga_Kurzemes pr.1_Damme", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9545351, longitude:24.035179, address:"Kurzemes prospekts 1", numMachines:14, laundryTypeId:2, totalCyclesInPeriod:21950, avgCyclesPerDayPerMachine:4.295499021526418 },
+  { id:1598, name:"LVA_008_Riga_Kalnciema 38_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9426853, longitude:24.0665147, address:"Kalnciema Iela 38", numMachines:7, laundryTypeId:2, totalCyclesInPeriod:12608, avgCyclesPerDayPerMachine:4.934637964774951 },
+  { id:1599, name:"LVA_010_Riga_Maza Rencenu 1_Ozols", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9282817, longitude:24.1796774, address:"Mazā Rencēnu 1", numMachines:11, laundryTypeId:2, totalCyclesInPeriod:14446, avgCyclesPerDayPerMachine:3.5980074719800745 },
+  { id:1626, name:"LVA_009_Salaspils_Rigas 24_Elvi", organizationName:"SIA LAUNDROMAT LV", city:"Salaspils", country:"LV", latitude:56.85519919999999, longitude:24.3436106, address:"Rīgas iela 24", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:12972, avgCyclesPerDayPerMachine:3.553972602739726 },
+  { id:1730, name:"LVA_011_Riga_Ieriku 3_Domina", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.96628339999999, longitude:24.1630052, address:"Ieriķu iela 3", numMachines:9, laundryTypeId:2, totalCyclesInPeriod:13469, avgCyclesPerDayPerMachine:4.100152207001522 },
+  { id:1735, name:"LVA_013_Riga_Brivibas 201_Teika Plaza", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9718038, longitude:24.161126, address:"Brīvības gat. 201", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:9159, avgCyclesPerDayPerMachine:2.5093150684931507 },
+  { id:1774, name:"LVA_012_Riga_Azenes 5_Olimpia", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9504641, longitude:24.082175, address:"Āzenes iela 5", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:11897, avgCyclesPerDayPerMachine:3.2594520547945205 },
+  { id:1832, name:"LVA_014_Riga_Maza Nometnu 27_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9353108, longitude:24.0722424, address:"Mazā Nometņu iela 27", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:14208, avgCyclesPerDayPerMachine:3.892602739726027 },
+  { id:1871, name:"LVA_017_Riga_Vesetas 15_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9660057, longitude:24.1250845, address:"Vesetas iela 15", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:9090, avgCyclesPerDayPerMachine:2.4904109589041097 },
+  { id:1877, name:"LVA_016_Cesis_Vienibas lauk.3_SR", organizationName:"SIA LAUNDROMAT LV", city:"Cēsis", country:"LV", latitude:57.31310930000001, longitude:25.2752241, address:"Vienības laukums 3", numMachines:9, laundryTypeId:2, totalCyclesInPeriod:13068, avgCyclesPerDayPerMachine:3.978082191780822 },
+  { id:1889, name:"LVA_018_Riga_Latgales 357_Dole", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9056605, longitude:24.1904579, address:"Latgales iela 357", numMachines:9, laundryTypeId:2, totalCyclesInPeriod:10918, avgCyclesPerDayPerMachine:3.3235920852359206 },
+  { id:1940, name:"LVA_020_Valmiera_Rigas 74_Rimi", organizationName:"SIA LAUNDROMAT LV", city:"Valmiera", country:"LV", latitude:57.53269889999999, longitude:25.393042, address:"Rīgas iela 74", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:9922, avgCyclesPerDayPerMachine:2.7183561643835614 },
+  { id:1966, name:"LVA_015_Riga_Melidas 11_SR", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:57.0329103, longitude:24.1127997, address:"Melīdas iela 11", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:8804, avgCyclesPerDayPerMachine:2.412054794520548 },
+  { id:2024, name:"LVA_019_Riga_Matisa 23_SC", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.95747890000001, longitude:24.1333233, address:"Matīsa iela 23", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:9071, avgCyclesPerDayPerMachine:2.4852054794520546 },
+  { id:2051, name:"LVA_021_Jelgava_Petera 3_SR", organizationName:"SIA LAUNDROMAT LV", city:"Jelgava", country:"LV", latitude:56.65038609999999, longitude:23.7174607, address:"Pētera iela 3", numMachines:14, laundryTypeId:2, totalCyclesInPeriod:22713, avgCyclesPerDayPerMachine:4.44481409001957 },
+  { id:2075, name:"LVA_022_Riga_Prusu 2B_Rimi", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9149121, longitude:24.1773974, address:"Prūšu iela 2", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:6214, avgCyclesPerDayPerMachine:1.7024657534246574 },
+  { id:2139, name:"LVA_023_Liepaja_Klaipedas 62_XL Sala", organizationName:"SIA LAUNDROMAT LV", city:"Liepāja", country:"LV", latitude:56.491738, longitude:21.0035657, address:"Klaipēdas iela 62", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:11233, avgCyclesPerDayPerMachine:3.0775342465753424 },
+  { id:2203, name:"LVA_024_Riga_Nicgales_46_Maxima", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.94614989999999, longitude:24.1717949, address:"Nīcgales iela 46", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:4256, avgCyclesPerDayPerMachine:1.166027397260274 },
+  { id:2308, name:"LVA_025_Daugavpils_Cietoksna_60_Ditton", organizationName:"SIA LAUNDROMAT LV", city:"Daugavpils", country:"LV", latitude:55.8740655, longitude:26.517901, address:"Cietokšņa iela 60", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:14122, avgCyclesPerDayPerMachine:3.869041095890411 },
+  { id:2421, name:"LVA_030_Tukums_Kurzemes_36_Maxima", organizationName:"SIA LAUNDROMAT LV", city:"Tukums", country:"LV", latitude:56.97127159999999, longitude:23.15317, address:"Kurzemes iela 36", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:12577, avgCyclesPerDayPerMachine:3.4457534246575343 },
+  { id:2484, name:"LVA_027_Riga_Gailezera_8_TC_Gailezers", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9677265, longitude:24.236542, address:"Gaiļezera iela 8", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:5381, avgCyclesPerDayPerMachine:1.4742465753424658 },
+  { id:2531, name:"LVA_029_Ogre_Rigas 23_Dauga", organizationName:"SIA LAUNDROMAT LV", city:"Ogre", country:"LV", latitude:56.8164447, longitude:24.5867486, address:"Rīgas iela 23", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:6974, avgCyclesPerDayPerMachine:1.9106849315068493 },
+  { id:2547, name:"LVA_026_Riga_Lidonu_27_Mego", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9690786, longitude:24.0594668, address:"Lidoņu iela 27", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:4928, avgCyclesPerDayPerMachine:1.35013698630137 },
+  { id:2713, name:"LVA_028_Valmiera_Apina_12_SR", organizationName:"SIA LAUNDROMAT LV", city:"Valmiera", country:"LV", latitude:57.5428788, longitude:25.4164322, address:"Georga Apiņa iela 12", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:8224, avgCyclesPerDayPerMachine:2.253150684931507 },
+  { id:2736, name:"LVA_033_Smiltene_Kaleju_7_Laims", organizationName:"SIA LAUNDROMAT LV", city:"Smiltene", country:"LV", latitude:57.4256737, longitude:25.8973482, address:"Kalēju iela 7", numMachines:6, laundryTypeId:2, totalCyclesInPeriod:3777, avgCyclesPerDayPerMachine:1.7246575342465753 },
+  { id:2869, name:"LVA_036_Riga_Bikeru_iela_4_Saga", organizationName:"SIA LAUNDROMAT LV", city:"Ulbroka", country:"LV", latitude:56.95056779999999, longitude:24.2533228, address:"Biķeru iela 4", numMachines:9, laundryTypeId:2, totalCyclesInPeriod:4169, avgCyclesPerDayPerMachine:1.2691019786910198 },
+  { id:2978, name:"LVA_040_Riga_Lacplesa 76_Lidl", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9482167, longitude:24.1336857, address:"Lāčplēša iela 76", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:3009, avgCyclesPerDayPerMachine:0.8243835616438356 },
+  { id:2992, name:"LVA_031_Sigulda_L.Paegles_3_SR", organizationName:"SIA LAUNDROMAT LV", city:"Sigulda", country:"LV", latitude:57.1570221, longitude:24.8498555, address:"Leona Paegles iela 3", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:6670, avgCyclesPerDayPerMachine:1.8273972602739725 },
+  { id:3004, name:"LVA_034_Olaine_Zeiferta_6_TC_Olanija", organizationName:"SIA LAUNDROMAT LV", city:"Olaine", country:"LV", latitude:56.7891372, longitude:23.9409527, address:"Zeiferta iela 6", numMachines:9, laundryTypeId:2, totalCyclesInPeriod:2153, avgCyclesPerDayPerMachine:0.6554033485540335 },
+  { id:3057, name:"LVA_035_Rezekne_Atbrivosanas_aleja_109_TC_Lira", organizationName:"SIA LAUNDROMAT LV", city:"Rēzekne", country:"LV", latitude:56.5108842, longitude:27.3328406, address:"Atbrīvošanas Aleja 109", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:6625, avgCyclesPerDayPerMachine:1.8150684931506849 },
+  { id:3102, name:"LVA_039_Jekabpils_Brivibas 108_Maxima", organizationName:"SIA LAUNDROMAT LV", city:"Jēkabpils", country:"LV", latitude:56.49502159999999, longitude:25.8701986, address:"Brīvības iela 108", numMachines:9, laundryTypeId:2, totalCyclesInPeriod:3647, avgCyclesPerDayPerMachine:1.1101978691019787 },
+  { id:3136, name:"LVA_032_Bauska_Pludona_32_SR", organizationName:"SIA LAUNDROMAT LV", city:"Bauska", country:"LV", latitude:56.4096017, longitude:24.1861932, address:"Plūdoņa iela 32", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:3964, avgCyclesPerDayPerMachine:1.0860273972602739 },
+  { id:3193, name:"LVA_041_Jurmala_Raina_112B_Ligo", organizationName:"SIA LAUNDROMAT LV", city:"Jūrmala", country:"LV", latitude:56.95981570000001, longitude:23.6108786, address:"Raiņa iela 112B", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:3951, avgCyclesPerDayPerMachine:1.0824657534246576 },
+  { id:3238, name:"LVA_043_Daugavpils_Raipoles_11A_Avenu", organizationName:"SIA LAUNDROMAT LV", city:"Daugavpils", country:"LV", latitude:55.9002577, longitude:26.526231, address:"Raipoles iela 11a", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:2198, avgCyclesPerDayPerMachine:0.6021917808219178 },
+  { id:3349, name:"LVA_038_Liepaja_Vitolu_30-1N_SR", organizationName:"SIA LAUNDROMAT LV", city:"Liepāja", country:"LV", latitude:56.5090187, longitude:21.0008573, address:"Vītolu iela 30", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:1541, avgCyclesPerDayPerMachine:0.42219178082191783 },
+  { id:3427, name:"LVA_044_Riga_Kurzemes_Prospekts_132A_MEGO", organizationName:"SIA LAUNDROMAT LV", city:"Rīga", country:"LV", latitude:56.9618006, longitude:23.9996303, address:"Kurzemes prospekts 132", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:670, avgCyclesPerDayPerMachine:0.18356164383561643 },
+  { id:3578, name:"LVA_037_Ventspils_Lielais_prospekts_34-49_SR", organizationName:"SIA LAUNDROMAT LV", city:"Ventspils", country:"LV", latitude:57.3899175, longitude:21.57121, address:"Lielais prospekts 34", numMachines:10, laundryTypeId:2, totalCyclesInPeriod:1770, avgCyclesPerDayPerMachine:0.4849315068493151 },
 ];
 const COUNTRY_NAMES = { ES:"España" };
 
@@ -397,10 +433,10 @@ function fmt(n){ return Math.round(n).toLocaleString('es-ES'); }
 function fmt1(n){ return n.toLocaleString('es-ES',{minimumFractionDigits:1,maximumFractionDigits:1}); }
 
 /* ===================== STATE ===================== */
-let state = { type:'all', days:365, minRatio:0, maxRatio:8, minMachines:0, maxMachines:20 };
+let state = { type:'all', days:365, minRatio:0, maxRatio:5, minMachines:0, maxMachines:20 };
 
 /* ===================== MAP SETUP ===================== */
-const map = L.map('map', { zoomControl:false, minZoom:2, maxBounds:[[-90,-200],[90,200]] }).setView([41.74, 2.21], 9.8);
+const map = L.map('map', { zoomControl:false, minZoom:2, maxBounds:[[-90,-200],[90,200]] }).setView([56.95, 24.1], 7);
 L.control.zoom({ position:'bottomright' }).addTo(map);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution:'&copy; OpenStreetMap contributors', maxZoom:18, subdomains:['a','b','c']
