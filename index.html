@@ -216,14 +216,15 @@
 
   <div class="topbar">
     <div class="brand">
-      <div class="brand-mark">
-        <svg viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="7" stroke="white" stroke-width="1.6"/><circle cx="12" cy="12" r="3" stroke="white" stroke-width="1.6"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2" stroke="white" stroke-width="1.6" stroke-linecap="round"/></svg>
+      <div class="brand-mark" style="background: #1b7a8f; display:flex; align-items:center; justify-content:center; border-radius: 6px; font-size: 22px; font-weight: 900; color: white; font-family: 'Arial', sans-serif; letter-spacing: -1px;">
+        G
       </div>
       <div>
         <div class="brand-name">LaundryScope</div>
-        <div class="brand-sub">Utilización global de máquinas</div>
+        <div class="brand-sub">Powered by Girbau Sapphire</div>
       </div>
     </div>
+
 
     <div class="filters">
       <div class="fgroup" id="type-filter">
@@ -572,16 +573,22 @@ document.querySelectorAll('#metric-filter button').forEach(btn=>{
     btn.classList.add('active');
     state.metric = btn.dataset.metric;
     
-    /* Resetear filtros al máximo rango según métrica */
-    ratioMin.value = 0;
+    /* Resetear filtros a valores máximos según métrica */
     if(state.metric === 'per-laundry'){
-      ratioMax.value = 50;
-      state.maxRatio = 50;
+      document.getElementById('ratio-min').value = 0;
+      document.getElementById('ratio-max').value = 63;
+      state.minRatio = 0;
+      state.maxRatio = 63;
     } else {
-      ratioMax.value = 5;
+      document.getElementById('ratio-min').value = 0;
+      document.getElementById('ratio-max').value = 5;
+      state.minRatio = 0;
       state.maxRatio = 5;
     }
-    state.minRatio = 0;
+    document.getElementById('machines-min').value = 0;
+    document.getElementById('machines-max').value = 20;
+    state.minMachines = 0;
+    state.maxMachines = 20;
     
     /* Actualizar leyenda */
     updateLegend();
